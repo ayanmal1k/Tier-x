@@ -5,7 +5,7 @@ import WhatTierXDoes from "@/components/what-tierx-does"
 import Ecosystem from "@/components/ecosystem"
 import Tokenomics from "@/components/tokenomics"
 import Treasury from "@/components/treasury"
-import Security from "@/components/security"
+
 import Whitepaper from "@/components/whitepaper"
 import HowToBuy from "@/components/how-to-buy"
 import PriceChart from "@/components/price-chart"
@@ -23,7 +23,7 @@ export default function Home() {
       <Ecosystem />
       <Tokenomics />
       <Treasury />
-      <Security />
+
       <Whitepaper />
       <HowToBuy />
       <PriceChart />

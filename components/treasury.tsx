@@ -1,93 +1,124 @@
 "use client"
 
+import Link from "next/link"
 import { motion } from "framer-motion"
-import { Shield, Lock, BarChart3, RefreshCw, ArrowRight } from "lucide-react"
+import { IconLock, IconChartBar, IconRefresh, IconShield, IconArrowRight } from "@tabler/icons-react"
+
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
+
+const pillars = [
+  { icon: IconLock,      label: "Timelock Vaults"         },
+  { icon: IconChartBar,  label: "Liquidity Coordination"  },
+  { icon: IconRefresh,   label: "Ecosystem Funding"       },
+  { icon: IconShield,    label: "Reserve Management"      },
+]
+
+const stats = [
+  { value: "100M",          label: "Vault Release / 30 days" },
+  { value: "20%",           label: "Treasury Reserve"        },
+  { value: "Institutional", label: "Governance Framework"    },
+]
 
 export default function Treasury() {
-  const features = [
-    {
-      icon: Lock,
-      title: "Timelock Vaults",
-      description: "Structured release schedules ensure predictable liquidity and prevent market manipulation through time-locked vesting contracts.",
-    },
-    {
-      icon: BarChart3,
-      title: "Liquidity Coordination",
-      description: "Automated liquidity management through smart contract-based treasury operations with transparent on-chain execution.",
-    },
-    {
-      icon: RefreshCw,
-      title: "Ecosystem Funding",
-      description: "Sustainable capital allocation for ecosystem development, community programs, and infrastructure expansion.",
-    },
-    {
-      icon: Shield,
-      title: "Reserve Management",
-      description: "Institutional-grade asset custody and reserve management under a structured framework with multi-role governance controls.",
-    },
-  ]
-
   return (
     <section id="treasury" className="relative bg-surface-dark overflow-hidden py-section">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,82,255,0.06),transparent_50%)] pointer-events-none" />
-      <div className="mx-auto px-6 relative z-10" style={{ maxWidth: "1200px" }}>
+      {/* background glows */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,82,255,0.08),transparent_55%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,168,83,0.04),transparent_50%)] pointer-events-none" />
+
+      <div className="relative z-10 mx-auto px-6" style={{ maxWidth: "1200px" }}>
+
+        {/* ── Header ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.55, ease }}
+          className="text-center mb-14"
         >
+          <p className="text-caption-strong uppercase tracking-widest text-primary mb-3 font-semibold">
+            Infrastructure
+          </p>
           <h2 className="text-display-sm font-headline text-on-dark mb-4">
             Treasury Infrastructure
           </h2>
-          <p className="text-body-md text-on-dark-soft max-w-2xl mx-auto">
+          <p className="text-body-md text-on-dark-soft max-w-xl mx-auto leading-relaxed">
             Institutional-grade treasury systems with structured vaults, automated operations,
             and transparent on-chain governance.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-16">
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="rounded-xl bg-surface-dark-elevated border border-white/[0.06] p-8 transition-all hover:border-white/[0.12]"
-            >
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <feature.icon size={24} className="text-primary" />
-              </div>
-              <h3 className="text-title-md font-semibold text-on-dark mb-2">{feature.title}</h3>
-              <p className="text-body-md text-on-dark-soft">{feature.description}</p>
-            </motion.div>
-          ))}
-        </div>
-
+        {/* ── Stats ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-6"
+          transition={{ duration: 0.55, delay: 0.08, ease }}
+          className="grid grid-cols-3 gap-4 mb-12"
         >
-          {[
-            { label: "Vault Release", value: "100M / 30 days", desc: "Structured liquidity distribution" },
-            { label: "Treasury Reserve", value: "20%", desc: "Allocated for long-term stability" },
-            { label: "Framework", value: "Institutional", desc: "Multi-role governance structure" },
-          ].map((stat, i) => (
+          {stats.map((stat, i) => (
             <div
               key={i}
-              className="text-center rounded-xl bg-white/5 border border-white/5 p-6"
+              className="text-center rounded-xl bg-white/[0.04] border border-white/[0.06] py-6 px-4"
             >
-              <div className="text-display-sm text-on-dark font-headline mb-1">{stat.value}</div>
+              <div className="text-display-sm font-headline text-on-dark mb-1">{stat.value}</div>
               <div className="text-body-sm text-on-dark-soft">{stat.label}</div>
-              <div className="text-caption text-on-dark-soft mt-1">{stat.desc}</div>
             </div>
           ))}
         </motion.div>
+
+        {/* ── Pillars strip (trust-bar style) ── */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.14, ease }}
+          className="grid grid-cols-2 sm:grid-cols-4 gap-y-6 border border-white/[0.06] rounded-2xl px-8 py-7 bg-white/[0.02] mb-12"
+        >
+          {pillars.map((p, i) => {
+            const Icon = p.icon
+            return (
+              <div
+                key={i}
+                className="flex items-center gap-3 sm:border-r sm:border-white/[0.06] sm:last:border-0 sm:px-4 first:pl-0 last:pr-0"
+              >
+                <Icon size={18} className="text-primary flex-shrink-0" strokeWidth={1.75} />
+                <span className="text-body-sm font-medium text-on-dark-soft">{p.label}</span>
+              </div>
+            )
+          })}
+        </motion.div>
+
+        {/* ── CTA to Security ── */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.18, ease }}
+          className="rounded-2xl border border-primary/25 bg-primary/[0.06] px-8 py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5"
+        >
+          <div className="flex items-center gap-4">
+            <div className="w-11 h-11 rounded-xl bg-primary/15 flex items-center justify-center flex-shrink-0">
+              <IconShield size={20} className="text-primary" strokeWidth={1.75} />
+            </div>
+            <div>
+              <h3 className="text-title-md font-semibold text-on-dark mb-0.5">
+                Security &amp; Transparency
+              </h3>
+              <p className="text-body-sm text-on-dark-soft">
+                Verified contract · Multi-sig governance · On-chain disclosures · Risk documentation
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/security"
+            className="inline-flex items-center gap-2 rounded-pill bg-primary px-6 py-2.5 text-sm font-semibold text-on-primary hover:bg-primary-active transition-colors flex-shrink-0 group"
+          >
+            Security
+            <IconArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
+          </Link>
+        </motion.div>
+
       </div>
     </section>
   )

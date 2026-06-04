@@ -2,26 +2,29 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Shield, Copy, Check, Eye, FileCheck, Users, ScrollText, AlertTriangle, ExternalLink, Wallet } from "lucide-react"
+import {
+  IconShield, IconCopy, IconCheck, IconEye, IconFileCheck,
+  IconUsers, IconFileDescription, IconAlertTriangle, IconExternalLink, IconWallet,
+} from "@tabler/icons-react"
 
 const features = [
   {
-    icon: FileCheck,
+    icon: IconFileCheck,
     title: "Verified Contract",
     description: "Smart contract deployed on Ethereum. Source code verified on Etherscan for independent review.",
   },
   {
-    icon: Users,
+    icon: IconUsers,
     title: "Multi-Role Governance",
     description: "Role-based access control with separate admin, minter, and pauser roles for operational security.",
   },
   {
-    icon: ScrollText,
+    icon: IconFileDescription,
     title: "Transparent Operations",
     description: "All treasury operations executed on-chain with publicly verifiable transactions and balance tracking.",
   },
   {
-    icon: Eye,
+    icon: IconEye,
     title: "Audit Status",
     description: "Smart contract audit is currently in progress. Updates will be published upon completion.",
   },
@@ -68,6 +71,9 @@ export default function Security() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <p className="text-caption-strong uppercase tracking-widest text-primary mb-3 font-semibold">
+            Security
+          </p>
           <h2 className="text-display-sm font-headline text-ink mb-4">
             Security & Transparency
           </h2>
@@ -105,7 +111,7 @@ export default function Security() {
         >
           <div className="flex items-center gap-3 mb-6">
             <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-              <Shield className="text-primary" size={20} />
+              <IconShield className="text-primary" size={20} />
             </div>
             <div>
               <h3 className="text-title-md font-semibold text-ink">Contract Address</h3>
@@ -122,7 +128,7 @@ export default function Security() {
                 className="inline-flex items-center justify-center gap-2 rounded-pill bg-primary px-5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-active"
                 style={{ height: "44px" }}
               >
-                {copied ? <Check size={16} /> : <Copy size={16} />}
+                {copied ? <IconCheck size={16} /> : <IconCopy size={16} />}
                 {copied ? "Copied" : "Copy"}
               </button>
               <a
@@ -132,7 +138,7 @@ export default function Security() {
                 className="inline-flex items-center justify-center rounded-pill bg-surface-strong px-4 text-ink transition-colors hover:bg-hairline"
                 style={{ height: "44px" }}
               >
-                <ExternalLink size={16} />
+                <IconExternalLink size={16} />
               </a>
             </div>
           </div>
@@ -173,7 +179,7 @@ export default function Security() {
           <div className="rounded-xl border border-hairline/60 bg-surface-soft p-8">
             <div className="flex items-start gap-3 mb-6">
               <div className="w-10 h-10 rounded-full bg-semantic-down/10 flex items-center justify-center flex-shrink-0 mt-1">
-                <AlertTriangle size={20} className="text-semantic-down" />
+                <IconAlertTriangle size={20} className="text-semantic-down" />
               </div>
               <div>
                 <h3 className="text-title-md font-semibold text-ink mb-1">Risk Disclosures</h3>

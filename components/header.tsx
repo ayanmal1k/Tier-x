@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X, ChevronDown, ChartLine, ShoppingCart } from "lucide-react"
+import { Menu, X, ChevronDown, ChartLine, ShoppingCart, ArrowRight } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
@@ -11,7 +11,7 @@ const navItems = [
   { label: "Ecosystem", href: "#ecosystem" },
   { label: "Tokenomics", href: "#tokenomics" },
   { label: "Treasury", href: "#treasury" },
-  { label: "Security", href: "#security" },
+  { label: "Security", href: "/security" },
   { label: "Roadmap", href: "#roadmap" },
   { label: "Community", href: "#community" },
 ]
@@ -133,11 +133,12 @@ export default function Header() {
 
         <div className="hidden md:flex items-center gap-3">
           <Link
-            href="#ecosystem"
-            className="inline-flex items-center justify-center rounded-pill bg-primary px-5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-active"
+            href="/security"
+            className="inline-flex items-center justify-center gap-2 rounded-pill bg-primary px-5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-active group"
             style={{ height: "44px" }}
           >
-            Enter Ecosystem
+            Security
+            <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
 
@@ -187,12 +188,13 @@ export default function Header() {
 
               <div className="flex flex-col gap-2 pt-4">
                 <Link
-                  href="#ecosystem"
-                  className="inline-flex items-center justify-center rounded-pill bg-primary px-5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-active"
+                  href="/security"
+                  className="inline-flex items-center justify-center gap-2 rounded-pill bg-primary px-5 py-2 text-sm font-semibold text-on-primary transition-colors hover:bg-primary-active group"
                   style={{ height: "44px" }}
                   onClick={() => setIsOpen(false)}
                 >
-                  Enter Ecosystem
+                  Security
+                  <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
             </div>
