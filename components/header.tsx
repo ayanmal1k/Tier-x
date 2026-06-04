@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X, ChevronDown, ChartLine, ShoppingCart, Bridge } from "lucide-react"
+import { Menu, X, ChevronDown, ChartLine, ShoppingCart } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
@@ -57,14 +57,10 @@ export default function Header() {
               alt="TierX"
               width={32}
               height={32}
-              className={`rounded-full transition-all duration-300 ${scrolled ? "" : "brightness-0 invert"}`}
+              className="rounded-full transition-all duration-300"
             />
           </div>
-          <span
-            className={`text-lg font-semibold transition-colors ${
-              scrolled ? "text-ink" : "text-on-dark"
-            }`}
-          >
+          <span className="text-lg font-semibold text-ink transition-colors">
             TierX
           </span>
         </Link>
@@ -74,11 +70,7 @@ export default function Header() {
             <Link
               key={item.label}
               href={item.href}
-              className={`text-sm font-medium transition-colors ${
-                scrolled
-                  ? "text-body hover:text-ink"
-                  : "text-on-dark/80 hover:text-on-dark"
-              }`}
+              className="text-sm font-medium transition-colors text-body hover:text-ink"
             >
               {item.label}
             </Link>
@@ -90,11 +82,7 @@ export default function Header() {
             onMouseLeave={() => setResourcesOpen(false)}
           >
             <button
-              className={`flex items-center gap-1 text-sm font-medium transition-colors ${
-                scrolled
-                  ? "text-body hover:text-ink"
-                  : "text-on-dark/80 hover:text-on-dark"
-              }`}
+              className="flex items-center gap-1 text-sm font-medium transition-colors text-body hover:text-ink"
             >
               Resources
               <ChevronDown
@@ -136,11 +124,7 @@ export default function Header() {
             <Link
               key={item.label}
               href={item.href}
-              className={`text-sm font-medium transition-colors ${
-                scrolled
-                  ? "text-body hover:text-ink"
-                  : "text-on-dark/80 hover:text-on-dark"
-              }`}
+              className="text-sm font-medium transition-colors text-body hover:text-ink"
             >
               {item.label}
             </Link>
@@ -158,9 +142,7 @@ export default function Header() {
         </div>
 
         <button
-          className={`md:hidden transition-colors ${
-            scrolled ? "text-ink" : "text-on-dark"
-          }`}
+          className="md:hidden transition-colors text-ink"
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}

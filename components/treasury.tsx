@@ -29,8 +29,8 @@ export default function Treasury() {
 
   return (
     <section id="treasury" className="relative bg-surface-dark overflow-hidden py-section">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,82,255,0.06),transparent_50%)]" />
-      <div className="mx-auto px-6 relative" style={{ maxWidth: "1200px" }}>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,rgba(0,82,255,0.06),transparent_50%)] pointer-events-none" />
+      <div className="mx-auto px-6 relative z-10" style={{ maxWidth: "1200px" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,12 +38,6 @@ export default function Treasury() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 rounded-pill bg-primary/10 px-4 py-1.5 mb-6">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span className="text-caption-strong text-primary font-semibold uppercase tracking-wider">
-              Treasury
-            </span>
-          </div>
           <h2 className="text-display-sm font-headline text-on-dark mb-4">
             Treasury Infrastructure
           </h2>

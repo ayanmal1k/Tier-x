@@ -1,38 +1,127 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Shield, Coins, FileCheck, Route, BookOpen, Users } from "lucide-react"
+import {
+  IconStack,
+  IconLock,
+  IconCode,
+  IconMap,
+  IconFileText,
+  IconUsers,
+} from "@tabler/icons-react"
 
 const trustItems = [
-  { icon: Coins, label: "Ethereum-Based Asset" },
-  { icon: Shield, label: "100B Fixed Supply" },
-  { icon: FileCheck, label: "Public Contract" },
-  { icon: Route, label: "Treasury Roadmap" },
-  { icon: BookOpen, label: "Whitepaper Available" },
-  { icon: Users, label: "Community Infrastructure" },
+  {
+    icon: IconStack,
+    label: "Ethereum-Based Asset",
+    description: "Securely anchored on mainnet",
+  },
+  {
+    icon: IconLock,
+    label: "100B Fixed Supply",
+    description: "Deflationary tokenomics model",
+  },
+  {
+    icon: IconCode,
+    label: "Public Contract",
+    description: "Verified and open-source",
+  },
+  {
+    icon: IconMap,
+    label: "Treasury Roadmap",
+    description: "Transparent growth milestones",
+  },
+  {
+    icon: IconFileText,
+    label: "Whitepaper Available",
+    description: "Detailed technical architecture",
+  },
+  {
+    icon: IconUsers,
+    label: "Community Infrastructure",
+    description: "Decentralized governance",
+  },
 ]
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.15,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number], // Custom smooth easeOut cubic
+    },
+  },
+  hover: {
+    y: -6,
+    transition: {
+      duration: 0.25,
+      ease: "easeOut" as const,
+    },
+  },
+}
+
+const iconVariants = {
+  hover: {
+    scale: 1.1,
+    transition: {
+      type: "spring" as const,
+      stiffness: 400,
+      damping: 15,
+    },
+  },
+}
 
 export default function TrustBar() {
   return (
-    <section className="bg-canvas border-b border-hairline">
-      <div className="mx-auto px-6 py-6" style={{ maxWidth: "1200px" }}>
+    <section className="bg-canvas border-b border-hairline py-12">
+      <div className="mx-auto px-6" style={{ maxWidth: "1200px" }}>
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-y-10 lg:gap-y-0"
         >
-          {trustItems.map((item, index) => (
-            <div
-              key={index}
-              className="flex items-center gap-3 justify-center lg:justify-start"
-            >
-              <div className="w-8 h-8 rounded-full bg-primary/5 flex items-center justify-center flex-shrink-0">
-                <item.icon size={14} className="text-primary" />
-              </div>
-              <span className="text-body-sm text-muted whitespace-nowrap">{item.label}</span>
-            </div>
-          ))}
+          {trustItems.map((item, index) => {
+            const IconComponent = item.icon
+            return (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover="hover"
+                className="flex flex-col items-start gap-4 px-4 sm:px-6 lg:border-r lg:border-hairline-soft last:border-r-0 lg:first:pl-0 lg:last:pr-0 cursor-default"
+              >
+                <motion.div variants={iconVariants}>
+                  <IconComponent
+                    size={26}
+                    className="text-primary"
+                    stroke={1.5}
+                  />
+                </motion.div>
+                <div className="space-y-1">
+                  <h3 className="text-body-sm font-semibold text-ink leading-tight">
+                    {item.label}
+                  </h3>
+                  <p className="text-caption text-muted leading-relaxed">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            )
+          })}
         </motion.div>
       </div>
     </section>

@@ -38,6 +38,8 @@
     "@radix-ui/react-toggle": "1.1.1",
     "@radix-ui/react-toggle-group": "1.1.1",
     "@radix-ui/react-tooltip": "1.1.6",
+    "@tabler/icons": "^3.44.0",
+    "@tabler/icons-react": "^3.44.0",
     "@uniswap/widgets": "^2.59.0",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",

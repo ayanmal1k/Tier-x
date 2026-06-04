@@ -41,12 +41,6 @@ export default function Roadmap() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 rounded-pill bg-primary/10 px-4 py-1.5 mb-6">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span className="text-caption-strong text-primary font-semibold uppercase tracking-wider">
-              Roadmap
-            </span>
-          </div>
           <h2 className="text-display-sm font-headline text-ink mb-4">Strategic Development Plan</h2>
           <p className="text-body-md text-muted max-w-2xl mx-auto">
             Our strategic roadmap for building and expanding the TierX ecosystem across global markets.

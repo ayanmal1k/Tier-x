@@ -14,12 +14,6 @@ export default function PriceChart() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="inline-flex items-center gap-2 rounded-pill bg-primary/10 px-4 py-1.5 mb-6">
-            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span className="text-caption-strong text-primary font-semibold uppercase tracking-wider">
-              Price Chart
-            </span>
-          </div>
           <h2 className="text-display-sm font-headline text-ink mb-4">
             Live Price Chart
           </h2>
