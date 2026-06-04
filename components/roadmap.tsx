@@ -44,10 +44,10 @@ export default function Roadmap() {
   ]
 
   /* ── timeline tuning ──────────────────────────────── */
-  const totalDuration = 6      // seconds for one full cycle
-  const fillWindow = 0.7       // how long each circle takes to fill
-  const holdWindow = 1.2       // how long all stay filled before reset
-  const staggerStep = 0.9      // gap between each circle starting to fill
+  const totalDuration = 5      // seconds for one full cycle
+  const fillWindow = 0.6       // how long each circle takes to fill
+  const staggerStep = 0.7      // gap between each circle starting to fill
+  const resetDuration = 0.5    // how long the reset takes at the end
 
   return (
     <section id="roadmap" className="bg-canvas py-section overflow-hidden">
@@ -98,10 +98,11 @@ export default function Roadmap() {
               className="relative grid grid-cols-5 gap-4"
             >
               {roadmapItems.map((item, index) => {
-                const fillStart = index * staggerStep
-                const fillEnd = fillStart + fillWindow
-                const resetStart = totalDuration - holdWindow
-                const isLastPhase = index === roadmapItems.length - 1
+                /* pre-compute keyframe times for both circle and card */
+                const t0 = 0
+                const tFillStart = (index * staggerStep) / totalDuration
+                const tFillEnd = (index * staggerStep + fillWindow) / totalDuration
+                const tResetStart = 1 - resetDuration / totalDuration
 
                 return (
                   <motion.div
@@ -110,7 +111,7 @@ export default function Roadmap() {
                     className="relative flex flex-col items-center"
                   >
                     {/* ── Marker ── */}
-                    <div className="relative z-10 w-[22px] h-[22px] rounded-full bg-canvas border-[3px] border-primary mb-6 cursor-pointer">
+                    <div className="relative z-10 w-[22px] h-[22px] rounded-full bg-canvas border-[3px] border-primary mb-6">
                       {/* pulsing fill animation — left to right sequence */}
                       <motion.div
                         animate={{
@@ -118,63 +119,26 @@ export default function Roadmap() {
                         }}
                         transition={{
                           duration: totalDuration,
-                          times: [
-                            0,
-                            fillStart / totalDuration,
-                            fillEnd / totalDuration,
-                            resetStart / totalDuration,
-                            1,
-                          ],
+                          times: [t0, tFillStart, tFillEnd, tResetStart, 1],
                           ease: "easeInOut",
                           repeat: Infinity,
-                          repeatDelay: 0.3,
+                          repeatDelay: 0.2,
                         }}
-                        className="absolute inset-[3px] rounded-full bg-primary origin-center"
+                        className="absolute inset-[3px] rounded-full bg-primary"
                       />
-
-                      {/* expanding ring on its turn */}
-                      {!isLastPhase && (
-                        <motion.div
-                          animate={{
-                            scale: [0.8, 2.4],
-                            opacity: [0, 0.6, 0],
-                          }}
-                          transition={{
-                            duration: totalDuration,
-                            times: [
-                              0,
-                              fillEnd / totalDuration,
-                              (fillEnd + 0.4) / totalDuration,
-                            ],
-                            ease: "easeOut",
-                            repeat: Infinity,
-                            repeatDelay: 0.3,
-                          }}
-                          className="absolute inset-0 rounded-full border-2 border-primary pointer-events-none"
-                        />
-                      )}
-
-                      <span className="absolute inset-0 flex items-center justify-center text-caption-strong font-bold text-primary z-10 mix-blend-difference">
-                        {index + 1}
-                      </span>
                     </div>
 
                     {/* ── Card ── */}
                     <motion.div
                       animate={{
-                        y: [0, -4, 0],
+                        y: [0, 0, -6, 0, 0],
                       }}
                       transition={{
                         duration: totalDuration,
-                        times: [
-                          0,
-                          ((fillStart + fillEnd) / 2) / totalDuration,
-                          fillEnd / totalDuration,
-                        ],
+                        times: [t0, tFillStart, (tFillStart + tFillEnd) / 2, tFillEnd, 1],
                         ease: "easeInOut",
                         repeat: Infinity,
-                        repeatDelay: 0.3,
-                        delay: index * 0.05,
+                        repeatDelay: 0.2,
                       }}
                       whileHover={{ y: -8, boxShadow: "0 20px 50px rgba(0,0,0,0.1)" }}
                       className="group w-full rounded-2xl border border-hairline bg-surface-card p-5 flex-1 flex flex-col"
