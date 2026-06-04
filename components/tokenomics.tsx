@@ -1,165 +1,278 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts"
-import { Copy, Check, ExternalLink } from "lucide-react"
 import { useState } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { PieChart, Pie, Cell, ResponsiveContainer, Sector } from "recharts"
+import { Globe, Gift, Lock, Vote } from "lucide-react"
 
+/* ─── animation presets ─────────────────────────────────── */
+const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease } },
+}
+
+const iconVariants = {
+  hover: {
+    scale: 1.12,
+    transition: { type: "spring" as const, stiffness: 400, damping: 15 },
+  },
+}
+
+/* ─── custom shape — smoothly highlights active slice ─── */
+const renderShape = (props: {
+  cx: number; cy: number; innerRadius: number; outerRadius: number
+  startAngle: number; endAngle: number; fill: string
+  name?: string; value?: number; isActive?: boolean; payload?: { name: string; value: number }
+}) => {
+  const { cx, cy, innerRadius, outerRadius, startAngle, endAngle, fill, isActive, payload } = props
+
+  return (
+    <g>
+      <Sector
+        cx={cx} cy={cy}
+        innerRadius={innerRadius}
+        outerRadius={outerRadius}
+        startAngle={startAngle}
+        endAngle={endAngle}
+        fill={fill}
+        opacity={isActive ? 1 : 0.85}
+        style={{
+          transition: "opacity 0.25s ease",
+          filter: isActive ? `drop-shadow(0 4px 12px ${fill}55)` : "none",
+        }}
+      />
+      {isActive && payload && (
+        <>
+          <Sector
+            cx={cx} cy={cy}
+            innerRadius={outerRadius + 4}
+            outerRadius={outerRadius + 8}
+            startAngle={startAngle}
+            endAngle={endAngle}
+            fill={fill}
+            opacity={0.2}
+            style={{ transition: "opacity 0.3s ease" }}
+          />
+          <text x={cx} y={cy - 8} textAnchor="middle" fill="#0a0b0d" className="font-headline" style={{ fontSize: 13, fontWeight: 600, fontFamily: "Sora, Inter, sans-serif" }}>
+            {payload.name.split(" ").map((word: string, i: number) => (
+              <tspan key={i} x={cx} dy={i === 0 ? 0 : 16}>{word}</tspan>
+            ))}
+          </text>
+          <text x={cx} y={cy + 12 + (payload.name.split(" ").length - 1) * 18} textAnchor="middle" fill={fill} style={{ fontSize: 20, fontWeight: 700, fontFamily: "JetBrains Mono, monospace" }}>
+            {payload.value}%
+          </text>
+        </>
+      )}
+    </g>
+  )
+}
+
+/* ─── data ───────────────────────────────────────────────── */
+const tokenomicsData = [
+  { name: "Liquidity Pool",        value: 30, color: "#0052ff" },
+  { name: "Community Treasury",    value: 25, color: "#d4a853" },
+  { name: "Team & Development",    value: 15, color: "#05b169" },
+  { name: "Marketing & Ops",       value: 10, color: "#7c828a" },
+  { name: "Reserve",               value: 20, color: "#a8b8cc" },
+]
+
+const tokenDetails = [
+  { label: "Token Name",    value: "TierX"           },
+  { label: "Symbol",        value: "TIERX"           },
+  { label: "Total Supply",  value: "100,000,000,000" },
+  { label: "Network",       value: "Ethereum"        },
+  { label: "Decimals",      value: "18"              },
+]
+
+const useCases = [
+  { icon: Globe, label: "Ecosystem Access",      description: "Unlock tools, vaults & financial infrastructure." },
+  { icon: Gift,  label: "Rewards & Incentives",  description: "Earn through staking, referrals & participation."  },
+  { icon: Lock,  label: "Vault & Staking",       description: "Yield-generating vaults built into the protocol."  },
+  { icon: Vote,  label: "Treasury Governance",   description: "Vote on upgrades, allocations & grants."          },
+]
+
+/* ─── component ──────────────────────────────────────────── */
 export default function Tokenomics() {
-  const [copied, setCopied] = useState(false)
-  const contractAddress = "0xed500EF5e2cdF642ce715675a67A31bDe09a7a97"
-
-  const copyToClipboard = async () => {
-    try {
-      await navigator.clipboard.writeText(contractAddress)
-      setCopied(true)
-      setTimeout(() => setCopied(false), 2000)
-    } catch {
-      // silent
-    }
-  }
-
-  const tokenomicsData = [
-    { name: "Liquidity Pool", value: 30, color: "#0052ff" },
-    { name: "Community Treasury", value: 25, color: "#05b169" },
-    { name: "Team & Development", value: 15, color: "#f4b000" },
-    { name: "Marketing & Operations", value: 10, color: "#7c828a" },
-    { name: "Reserve", value: 20, color: "#0a0b0d" },
-  ]
-
-  const tokenDetails = [
-    { label: "Token Name", value: "TierX" },
-    { label: "Symbol", value: "TIERX" },
-    { label: "Total Supply", value: "100,000,000,000" },
-    { label: "Network", value: "Ethereum" },
-    { label: "Decimals", value: "18" },
-  ]
-
-  const useCases = [
-    "Ecosystem access and participation",
-    "Rewards and incentive distributions",
-    "Vault participation and staking",
-    "Treasury coordination and governance",
-  ]
+  const [activeIndex, setActiveIndex] = useState<number | undefined>(undefined)
 
   return (
     <section id="tokenomics" className="bg-surface-soft py-section">
       <div className="mx-auto px-6" style={{ maxWidth: "1200px" }}>
+
+        {/* ── Header ── */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+          className="text-center mb-20"
         >
-          <h2 className="text-display-sm font-headline text-ink mb-4">
-            Token Distribution & Utility
-          </h2>
-          <p className="text-body-md text-muted max-w-2xl mx-auto">
-            TIERX is designed for ecosystem access, rewards, vault participation, and treasury coordination.
-          </p>
+          <motion.p variants={itemVariants} className="text-caption-strong uppercase tracking-widest text-primary mb-3 font-semibold">
+            Tokenomics
+          </motion.p>
+          <motion.h2 variants={itemVariants} className="text-display-sm font-headline text-ink mb-5">
+            Token Distribution &amp; Utility
+          </motion.h2>
+          <motion.p variants={itemVariants} className="text-body-md text-muted max-w-xl mx-auto leading-relaxed">
+            TIERX is engineered for ecosystem access, incentive rewards, vault participation, and decentralised treasury governance.
+          </motion.p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        {/* ── Chart + Details ── */}
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-20">
+
+          {/* Pie */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.93 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.65, ease }}
           >
-            <div className="h-[350px]">
+            <div className="h-[340px] w-full select-none">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={tokenomicsData}
                     cx="50%"
                     cy="50%"
-                    innerRadius={80}
-                    outerRadius={140}
+                    innerRadius={82}
+                    outerRadius={138}
                     paddingAngle={2}
                     dataKey="value"
-                    animationBegin={0}
-                    animationDuration={1500}
+                    activeIndex={activeIndex}
+                    shape={(props: unknown) => {
+                      const p = props as Record<string, unknown>
+                      const idx = tokenomicsData.findIndex(
+                        (d) => d.name === (p.payload as { name: string })?.name
+                      )
+                      return renderShape({ ...p, isActive: idx === activeIndex } as Parameters<typeof renderShape>[0] & { isActive: boolean })
+                    }}
+                    animationBegin={300}
+                    animationDuration={1100}
+                    animationEasing="ease-out"
+                    onMouseEnter={(_, index) => setActiveIndex(index)}
+                    onMouseLeave={() => setActiveIndex(undefined)}
+                    style={{ cursor: "pointer", outline: "none" }}
                   >
-                    {tokenomicsData.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} stroke="transparent" />
+                    {tokenomicsData.map((entry) => (
+                      <Cell
+                        key={entry.name}
+                        fill={entry.color}
+                        stroke="transparent"
+                      />
                     ))}
                   </Pie>
-                  <Tooltip
-                    content={({ active, payload }) => {
-                      if (active && payload && payload.length) {
-                        return (
-                          <div className="bg-canvas border border-hairline rounded-lg p-3 shadow-card">
-                            <p className="text-title-sm font-semibold text-ink">{payload[0].name}</p>
-                            <p className="text-body-strong text-primary">{`${payload[0].value}%`}</p>
-                          </div>
-                        )
-                      }
-                      return null
-                    }}
-                  />
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="grid grid-cols-5 gap-3 mt-4">
+
+            {/* Legend */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              className="grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-3 mt-4 px-2"
+            >
               {tokenomicsData.map((item, index) => (
-                <div key={index} className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-                  <span className="text-body-sm text-muted truncate">{item.name}</span>
-                </div>
+                <motion.button
+                  key={index}
+                  variants={itemVariants}
+                  onMouseEnter={() => setActiveIndex(index)}
+                  onMouseLeave={() => setActiveIndex(undefined)}
+                  className="flex items-center gap-2.5 text-left group"
+                >
+                  <motion.div
+                    className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: item.color }}
+                    animate={{
+                      scale: activeIndex === index ? 1.4 : 1,
+                      boxShadow: activeIndex === index ? `0 0 0 3px ${item.color}33` : "none",
+                    }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                  />
+                  <span
+                    className="text-body-sm leading-tight transition-colors duration-200"
+                    style={{ color: activeIndex === index ? item.color : "#7c828a" }}
+                  >
+                    {item.name}
+                  </span>
+                </motion.button>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
 
+          {/* Token Details */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid grid-cols-1 gap-3"
           >
-            <div className="grid grid-cols-1 gap-3 mb-8">
-              {tokenDetails.map((detail, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.08 }}
-                  viewport={{ once: true }}
-                  className="rounded-xl border border-hairline bg-surface-card px-5 py-4 flex justify-between items-center"
-                >
-                  <span className="text-body-md text-muted">{detail.label}</span>
-                  <span className="font-mono text-body-strong text-ink">{detail.value}</span>
-                </motion.div>
-              ))}
-            </div>
-
-            <div className="rounded-xl border border-hairline bg-surface-card p-5">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-body-md text-muted">Contract Address</span>
-                <button
-                  onClick={copyToClipboard}
-                  className="flex items-center gap-1 text-body-sm text-primary hover:text-primary-active transition-colors"
-                >
-                  {copied ? <Check size={14} /> : <Copy size={14} />}
-                  {copied ? "Copied" : "Copy"}
-                </button>
-              </div>
-              <p className="font-mono text-body-sm text-ink break-all">{contractAddress}</p>
-            </div>
-
-            <div className="mt-6">
-              <h4 className="text-title-sm font-semibold text-ink mb-3">Use Cases</h4>
-              <ul className="space-y-2">
-                {useCases.map((useCase, index) => (
-                  <li key={index} className="flex items-start gap-2 text-body-md text-muted">
-                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span>{useCase}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {tokenDetails.map((detail, index) => (
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                whileHover={{ x: 4, transition: { duration: 0.22, ease: "easeOut" } }}
+                className="rounded-xl border border-hairline bg-surface-card px-5 py-4 flex justify-between items-center"
+                style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}
+              >
+                <span className="text-body-md text-muted">{detail.label}</span>
+                <span className="font-mono text-body-strong text-ink">{detail.value}</span>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
+
+        {/* ── Use Cases — trust-bar style ── */}
+        <div className="border-t border-hairline pt-14">
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, ease }}
+            className="text-caption-strong uppercase tracking-widest text-muted mb-10 text-center font-semibold"
+          >
+            Token Use Cases
+          </motion.p>
+
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-50px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-10 lg:gap-y-0"
+          >
+            {useCases.map((item, index) => {
+              const Icon = item.icon
+              return (
+                <motion.div
+                  key={index}
+                  variants={itemVariants}
+                  whileHover="hover"
+                  className="flex flex-col items-start gap-4 px-4 sm:px-6 lg:border-r lg:border-hairline-soft last:border-r-0 lg:first:pl-0 lg:last:pr-0 cursor-default"
+                >
+                  <motion.div variants={iconVariants}>
+                    <Icon size={26} className="text-primary" strokeWidth={1.5} />
+                  </motion.div>
+                  <div className="space-y-1">
+                    <h3 className="text-body-sm font-semibold text-ink leading-tight">{item.label}</h3>
+                    <p className="text-caption text-muted leading-relaxed">{item.description}</p>
+                  </div>
+                </motion.div>
+              )
+            })}
+          </motion.div>
+        </div>
+
       </div>
     </section>
   )

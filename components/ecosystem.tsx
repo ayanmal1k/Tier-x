@@ -2,18 +2,19 @@
 
 import { motion } from "framer-motion"
 import {
-  Repeat, GraduationCap, Building, Clock, Ticket, Heart, Banknote, Infinity,
-} from "lucide-react"
+  IconRepeat, IconSchool, IconBuildingSkyscraper, IconClock,
+  IconGift, IconHeart, IconCoin, IconInfinity,
+} from "@tabler/icons-react"
 
 const engines = [
-  { title: "Reserve Activation Engine", icon: Repeat, description: "Liquidity operations engine creating efficient market cycles through automated reserve management protocols." },
-  { title: "Education Rewards Engine", icon: GraduationCap, description: "Learn-and-earn mechanism rewarding educational completion with TIERX tokens." },
-  { title: "Asset Tokenization Engine", icon: Building, description: "Real estate, vehicles, and physical assets digitized and managed under smart contracts." },
-  { title: "Holding Incentive Engine", icon: Clock, description: "Time-lock reward mechanism incentivizing long-term holding and disciplined treasury management." },
-  { title: "Community Rewards Vault", icon: Ticket, description: "Community distribution vault with randomized reward allocations and passive participation sharing." },
-  { title: "Healthcare Access Pool", icon: Heart, description: "Community-funded healthcare treasury pool with transparent on-chain governance." },
-  { title: "Stimulus Distribution Engine", icon: Banknote, description: "Community-based airdrop and stimulus distribution from pooled liquidity reserves." },
-  { title: "Infinity Treasury Vault", icon: Infinity, description: "Automated compounding treasury mechanism for sustainable ecosystem funding." },
+  { title: "Reserve Activation Engine", icon: IconRepeat, description: "Liquidity operations engine creating efficient market cycles through automated reserve management protocols." },
+  { title: "Education Rewards Engine", icon: IconSchool, description: "Learn-and-earn mechanism rewarding educational completion with TIERX tokens." },
+  { title: "Asset Tokenization Engine", icon: IconBuildingSkyscraper, description: "Real estate, vehicles, and physical assets digitized and managed under smart contracts." },
+  { title: "Holding Incentive Engine", icon: IconClock, description: "Time-lock reward mechanism incentivizing long-term holding and disciplined treasury management." },
+  { title: "Community Rewards Vault", icon: IconGift, description: "Community distribution vault with randomized reward allocations and passive participation sharing." },
+  { title: "Healthcare Access Pool", icon: IconHeart, description: "Community-funded healthcare treasury pool with transparent on-chain governance." },
+  { title: "Stimulus Distribution Engine", icon: IconCoin, description: "Community-based airdrop and stimulus distribution from pooled liquidity reserves." },
+  { title: "Infinity Treasury Vault", icon: IconInfinity, description: "Automated compounding treasury mechanism for sustainable ecosystem funding." },
 ]
 
 export default function Ecosystem() {
@@ -43,12 +44,15 @@ export default function Ecosystem() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.06 }}
               viewport={{ once: true }}
-              className="rounded-xl border border-hairline bg-surface-card p-8 transition-all hover:shadow-card"
+              whileHover={{ y: -4, boxShadow: "0 20px 60px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.08)" }}
+              className="group rounded-xl border border-hairline bg-surface-card p-8"
             >
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <engine.icon size={24} className="text-primary" />
+              <div className="mb-4">
+                <engine.icon size={32} className="text-primary" />
               </div>
-              <h3 className="text-title-md font-semibold text-ink mb-2">{engine.title}</h3>
+              <h3 className="text-title-md font-semibold text-ink group-hover:text-primary transition-colors duration-200 mb-2">
+                {engine.title}
+              </h3>
               <p className="text-body-md text-muted">{engine.description}</p>
             </motion.div>
           ))}

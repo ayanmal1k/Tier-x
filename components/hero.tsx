@@ -18,7 +18,7 @@ export default function Hero() {
 
             <h1
               className="text-display-mega font-headline text-ink mb-6"
-              style={{ fontWeight: 400 }}
+              style={{ fontWeight: 600 }}
             >
               Modern Treasury
               <br />

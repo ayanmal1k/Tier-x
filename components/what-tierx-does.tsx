@@ -1,29 +1,32 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Building2, Wallet, Users } from "lucide-react"
+import Image from "next/image"
 
 const pillars = [
   {
-    icon: Building2,
+    image: "/cards/treasury.png",
     title: "Treasury",
     description: "Digital asset reserve, liquidity coordination, and ecosystem funding through structured vault mechanisms.",
+    imageHeight: "240px",
   },
   {
-    icon: Wallet,
+    image: "/cards/payments.png",
     title: "Payments",
     description: "Future wallet infrastructure, token swaps, merchant access, and cross-border utility for global transactions.",
+    imageHeight: "240px",
   },
   {
-    icon: Users,
+    image: "/cards/community.png",
     title: "Community Infrastructure",
     description: "Education programs, asset onboarding, healthcare pool, housing support, and local economic development tools.",
+    imageHeight: "240px",
   },
 ]
 
 export default function WhatTierXDoes() {
   return (
-    <section className="bg-surface-soft py-section">
+    <section style={{ backgroundColor: "#ffffff" }} className="py-section">
       <div className="mx-auto px-6" style={{ maxWidth: "1200px" }}>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -45,17 +48,34 @@ export default function WhatTierXDoes() {
           {pillars.map((pillar, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="rounded-xl border border-hairline bg-surface-card p-8 transition-all hover:shadow-card"
+              whileHover={{ y: -4, boxShadow: "0 20px 60px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.08)" }}
+              className="rounded-2xl overflow-hidden"
+              style={{ backgroundColor: "#ffffff", border: "1px solid #dee1e6" }}
             >
-              <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-5">
-                <pillar.icon size={28} className="text-primary" />
+              <div className="p-8">
+                <h3
+                  className="font-headline text-ink mb-3"
+                  style={{ fontSize: "24px", lineHeight: "29px", fontWeight: 600 }}
+                >
+                  {pillar.title}
+                </h3>
+                <p className="text-body-md text-muted leading-relaxed mb-6">
+                  {pillar.description}
+                </p>
+                <div className="relative w-full rounded-lg overflow-hidden" style={{ height: pillar.imageHeight }}>
+                  <Image
+                    src={pillar.image}
+                    alt={pillar.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                  />
+                </div>
               </div>
-              <h3 className="text-title-lg font-headline text-ink mb-3">{pillar.title}</h3>
-              <p className="text-body-md text-muted leading-relaxed">{pillar.description}</p>
             </motion.div>
           ))}
         </div>
