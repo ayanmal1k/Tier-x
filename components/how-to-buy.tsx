@@ -49,7 +49,7 @@ export default function HowToBuy() {
           viewport={{ once: true, margin: "-60px" }}
           className="text-center mb-16"
         >
-          <h2 className="text-display-sm font-headline text-ink mb-4">Acquire TIERX</h2>
+          <h2 className="text-[30px] font-semibold leading-[1.1] tracking-[-0.75px] sm:text-display-sm font-headline text-ink mb-4">Acquire TIERX</h2>
           <p className="text-body-md text-muted max-w-2xl mx-auto">
             Get started in three simple steps. TIERX is available on Ethereum through decentralized exchanges.
           </p>

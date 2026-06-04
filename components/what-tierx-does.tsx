@@ -35,7 +35,7 @@ export default function WhatTierXDoes() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-display-sm font-headline text-ink mb-4">
+          <h2 className="text-[30px] font-semibold leading-[1.1] tracking-[-0.75px] sm:text-display-sm font-headline text-ink mb-4">
             What TierX Does
           </h2>
           <p className="text-body-md text-muted max-w-2xl mx-auto">

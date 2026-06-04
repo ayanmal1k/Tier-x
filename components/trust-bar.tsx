@@ -86,14 +86,14 @@ const iconVariants = {
 
 export default function TrustBar() {
   return (
-    <section className="bg-canvas border-b border-hairline py-12">
+    <section className="bg-canvas border-b border-hairline py-8 md:py-12">
       <div className="mx-auto px-6" style={{ maxWidth: "1200px" }}>
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-y-10 lg:gap-y-0"
+          className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-y-6 gap-x-4 sm:gap-y-8 lg:gap-y-0"
         >
           {trustItems.map((item, index) => {
             const IconComponent = item.icon
@@ -102,20 +102,20 @@ export default function TrustBar() {
                 key={index}
                 variants={itemVariants}
                 whileHover="hover"
-                className="flex flex-col items-start gap-4 px-4 sm:px-6 lg:border-r lg:border-hairline-soft last:border-r-0 lg:first:pl-0 lg:last:pr-0 cursor-default"
+                className="flex flex-col items-start gap-2.5 sm:gap-4 px-2 sm:px-4 md:px-6 lg:border-r lg:border-hairline-soft last:border-r-0 lg:first:pl-0 lg:last:pr-0 cursor-default"
               >
                 <motion.div variants={iconVariants}>
                   <IconComponent
-                    size={26}
+                    size={22}
                     className="text-primary"
                     stroke={1.5}
                   />
                 </motion.div>
-                <div className="space-y-1">
-                  <h3 className="text-body-sm font-semibold text-ink leading-tight">
+                <div className="space-y-0.5 sm:space-y-1">
+                  <h3 className="text-caption sm:text-body-sm font-semibold text-ink leading-tight">
                     {item.label}
                   </h3>
-                  <p className="text-caption text-muted leading-relaxed">
+                  <p className="text-caption text-muted leading-relaxed hidden sm:block">
                     {item.description}
                   </p>
                 </div>

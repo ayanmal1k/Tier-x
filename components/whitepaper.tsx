@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import {
   IconFileText, IconDownload, IconChevronDown, IconArrowRight,
@@ -39,7 +39,15 @@ const sectionColors = [
 ]
 
 export default function Whitepaper() {
-  const [expandedSection, setExpandedSection] = useState<number | null>(0)
+  const [expandedSection, setExpandedSection] = useState<number | null>(null)
+
+  useEffect(() => {
+    const mql = window.matchMedia("(min-width: 768px)")
+    const apply = () => setExpandedSection(mql.matches ? 0 : null)
+    apply()
+    mql.addEventListener("change", apply)
+    return () => mql.removeEventListener("change", apply)
+  }, [])
 
   const whitepaperSections = [
     {
@@ -112,7 +120,7 @@ export default function Whitepaper() {
           viewport={{ once: true, margin: "-60px" }}
           className="text-center mb-16"
         >
-          <h2 className="text-display-sm font-headline text-ink mb-4">
+          <h2 className="text-[30px] font-semibold leading-[1.1] tracking-[-0.75px] sm:text-display-sm font-headline text-ink mb-4">
             Technical Documentation
           </h2>
           <p className="text-body-md text-muted max-w-2xl mx-auto">

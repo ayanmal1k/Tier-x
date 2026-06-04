@@ -286,7 +286,7 @@ export default function Security() {
             variants={containerVariants}
             className="text-center mb-16"
           >
-            <motion.h2 variants={itemVariants} className="text-display-sm font-headline text-ink mb-4">
+            <motion.h2 variants={itemVariants} className="text-[30px] font-semibold leading-[1.1] tracking-[-0.75px] sm:text-display-sm font-headline text-ink mb-4">
               Built on Trust &amp; Transparency
             </motion.h2>
             <motion.p variants={itemVariants} className="text-body-md text-muted max-w-2xl mx-auto">
@@ -497,16 +497,16 @@ export default function Security() {
       </section>
 
       {/* ══════════════ SECURITY STATUS GRID ══════════════ */}
-      <section className="bg-surface-soft py-section">
+      <section className="bg-surface-soft py-16 md:py-section">
         <div className="mx-auto px-6" style={{ maxWidth: "1200px" }}>
           <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-60px" }}
             variants={containerVariants}
-            className="text-center mb-12"
+            className="text-center mb-10 md:mb-12"
           >
-            <motion.h2 variants={itemVariants} className="text-display-sm font-headline text-ink">
+            <motion.h2 variants={itemVariants} className="text-[30px] font-semibold leading-[1.1] tracking-[-0.75px] sm:text-display-sm font-headline text-ink">
               Security Status Overview
             </motion.h2>
           </motion.div>
@@ -516,7 +516,7 @@ export default function Security() {
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={containerVariants}
-            className="grid grid-cols-2 md:grid-cols-5 gap-4"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3 md:gap-4"
           >
             {disclosures.map((item, index) => {
               const Icon = item.icon
@@ -526,19 +526,19 @@ export default function Security() {
                   key={index}
                   variants={itemVariants}
                   whileHover={{ y: -4, boxShadow: "0 12px 32px rgba(0,0,0,0.08)" }}
-                  className={`group rounded-2xl border ${colors.border} bg-surface-card p-5 text-center transition-shadow duration-300`}
+                  className={`group rounded-2xl border ${colors.border} bg-surface-card p-4 sm:p-5 text-center transition-shadow duration-300`}
                 >
                   <motion.div
                     whileHover={{ scale: 1.1, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    className={`w-11 h-11 mx-auto rounded-xl ${colors.bg} flex items-center justify-center mb-3`}
+                    className={`w-10 h-10 sm:w-11 sm:h-11 mx-auto rounded-xl ${colors.bg} flex items-center justify-center mb-3`}
                   >
-                    <Icon size={22} className={colors.text} strokeWidth={1.75} />
+                    <Icon size={20} className={colors.text} strokeWidth={1.75} />
                   </motion.div>
                   <p className="text-caption-strong text-muted uppercase tracking-wider mb-1.5">
                     {item.label}
                   </p>
-                  <p className={`text-title-sm font-semibold ${colors.text}`}>
+                  <p className={`text-body-strong sm:text-title-sm font-semibold ${colors.text}`}>
                     {item.value}
                   </p>
                 </motion.div>
@@ -558,7 +558,7 @@ export default function Security() {
             variants={containerVariants}
             className="text-center mb-12"
           >
-            <motion.h2 variants={itemVariants} className="text-display-sm font-headline text-ink mb-4">
+            <motion.h2 variants={itemVariants} className="text-[30px] font-semibold leading-[1.1] tracking-[-0.75px] sm:text-display-sm font-headline text-ink mb-4">
               Wallet Safety Guide
             </motion.h2>
             <motion.p variants={itemVariants} className="text-body-md text-muted max-w-2xl mx-auto">

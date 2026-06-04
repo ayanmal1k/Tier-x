@@ -23,7 +23,7 @@ export default function Community() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-display-sm font-headline text-ink mb-4">Join the Network</h2>
+          <h2 className="text-[30px] font-semibold leading-[1.1] tracking-[-0.75px] sm:text-display-sm font-headline text-ink mb-4">Join the Network</h2>
           <p className="text-body-md text-muted max-w-2xl mx-auto">
             Connect with the TierX community across our social platforms and stay updated
             on the latest ecosystem developments.

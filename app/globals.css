@@ -10,6 +10,7 @@
   }
   body {
     @apply bg-canvas text-body font-sans antialiased;
+    overflow-x: hidden;
   }
 }
 

@@ -117,7 +117,7 @@ export default function Tokenomics() {
           <motion.p variants={itemVariants} className="text-caption-strong uppercase tracking-widest text-primary mb-3 font-semibold">
             Tokenomics
           </motion.p>
-          <motion.h2 variants={itemVariants} className="text-display-sm font-headline text-ink mb-5">
+          <motion.h2 variants={itemVariants} className="text-[30px] font-semibold leading-[1.1] tracking-[-0.75px] sm:text-display-sm font-headline text-ink mb-5">
             Token Distribution &amp; Utility
           </motion.h2>
           <motion.p variants={itemVariants} className="text-body-md text-muted max-w-xl mx-auto leading-relaxed">
