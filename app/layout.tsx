@@ -3,9 +3,9 @@ import type { Metadata } from "next"
 import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "TierX - Sovereign Economic Engine of the New Era",
+  title: "TierX — Private Digital Wealth Infrastructure",
   description:
-    "TierX is the upgraded sovereign token built to power a decentralized, trust-backed economic system for sovereign nations.",
+    "TierX is a private digital wealth infrastructure ecosystem designed to connect tokenized assets, treasury systems, payments, education, and community economic development into one unified financial network.",
   icons: {
     icon: "/tierx-logo.png",
     shortcut: "/tierx-logo.png",

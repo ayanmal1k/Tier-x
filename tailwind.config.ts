@@ -47,11 +47,14 @@ const config: Config = {
           down: "#cf202f",
         },
         "accent-yellow": "#f4b000",
+        platinum: "#e5e7eb",
+        gold: "#d4a853",
       },
       fontFamily: {
-        display: ["Inter", "-apple-system", "system-ui", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
-        sans: ["Inter", "-apple-system", "system-ui", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
+        display: ["Sora", "Space Grotesk", "Inter Tight", "-apple-system", "system-ui", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
+        sans: ["Inter", "Manrope", "-apple-system", "system-ui", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
         mono: ["JetBrains Mono", "Inter", "monospace"],
+        headline: ["Sora", "Space Grotesk", "Inter Tight", "-apple-system", "system-ui", "Segoe UI", "Roboto", "Helvetica", "Arial", "sans-serif"],
       },
       fontSize: {
         "display-mega": ["80px", { lineHeight: "1", letterSpacing: "-2px", fontWeight: "400" }],

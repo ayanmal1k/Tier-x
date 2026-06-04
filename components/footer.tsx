@@ -1,4 +1,3 @@
-import type React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Send, Instagram } from "lucide-react"
@@ -12,14 +11,19 @@ const socialLinks = [
   { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/sceptreworld?igsh=d3FwdndtaXE2aXc5&utm_source=qr" },
 ]
 
-const quickLinks = [
-  { name: "Whitepaper", href: "#whitepaper" },
+const navLinks = [
+  { name: "Ecosystem", href: "#ecosystem" },
   { name: "Tokenomics", href: "#tokenomics" },
-  { name: "Engines", href: "#engines" },
-  { name: "How to Buy", href: "#how-to-buy" },
+  { name: "Treasury", href: "#treasury" },
+  { name: "Security", href: "#security" },
+  { name: "Whitepaper", href: "#whitepaper" },
   { name: "Roadmap", href: "#roadmap" },
-  { name: "About Us", href: "#about-us" },
-  { name: "Our Community", href: "#socials" },
+  { name: "Community", href: "#community" },
+]
+
+const resourceLinks = [
+  { name: "Price Chart", href: "#price-chart" },
+  { name: "How to Buy", href: "#how-to-buy" },
 ]
 
 export default function Footer() {
@@ -32,11 +36,11 @@ export default function Footer() {
               <div className="relative h-8 w-8">
                 <Image src="/tierx-logo.png" alt="TierX" width={32} height={32} className="rounded-full" />
               </div>
-              <span className="text-title-lg font-display text-ink">TierX</span>
+              <span className="text-title-lg font-headline text-ink">TierX</span>
             </Link>
             <p className="text-body-md text-muted max-w-md mb-6">
-              TierX is the upgraded sovereign token built to power a decentralized, trust-backed economic system for
-              sovereign nations starting with Ayiti (Haiti).
+              Private digital wealth infrastructure connecting tokenized assets, treasury systems,
+              payments, education, and community economic development into one unified financial network.
             </p>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -47,11 +51,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-full bg-surface-strong flex items-center justify-center hover:bg-primary/10 transition-all"
                 >
-                  {typeof social.icon === "function" ? (
-                    <social.icon size={16} className="text-muted" />
-                  ) : (
-                    <social.icon size={16} className="text-muted" />
-                  )}
+                  <social.icon size={16} className="text-muted" />
                   <span className="sr-only">{social.name}</span>
                 </a>
               ))}
@@ -59,9 +59,9 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-title-sm font-semibold text-ink mb-4">Quick Links</h3>
+            <h3 className="text-title-sm font-semibold text-ink mb-4">Platform</h3>
             <ul className="space-y-3">
-              {quickLinks.map((item) => (
+              {navLinks.map((item) => (
                 <li key={item.name}>
                   <Link href={item.href} className="text-body-md text-muted hover:text-primary transition-colors">
                     {item.name}
@@ -72,16 +72,18 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-title-sm font-semibold text-ink mb-4">Contact</h3>
+            <h3 className="text-title-sm font-semibold text-ink mb-4">Resources</h3>
             <ul className="space-y-3">
+              {resourceLinks.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-body-md text-muted hover:text-primary transition-colors">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
               <li>
                 <a href="https://t.me/TIERXwealth" target="_blank" rel="noopener noreferrer" className="text-body-md text-muted hover:text-primary transition-colors">
-                  Telegram
-                </a>
-              </li>
-              <li>
-                <a href="https://x.com/z_z444portal?s=21" target="_blank" rel="noopener noreferrer" className="text-body-md text-muted hover:text-primary transition-colors">
-                  Twitter / X
+                  Support
                 </a>
               </li>
             </ul>
@@ -90,7 +92,11 @@ export default function Footer() {
 
         <div className="border-t border-hairline mt-12 pt-8 text-center">
           <p className="text-body-sm text-muted">
-            &copy; {new Date().getFullYear()} TierX. All rights reserved. Backed by Sceptre Dominion Private Trust.
+            &copy; {new Date().getFullYear()} TierX. All rights reserved.
+          </p>
+          <p className="text-caption text-muted mt-2">
+            TierX is a private digital wealth infrastructure ecosystem. Nothing on this website
+            constitutes financial advice or a solicitation to invest.
           </p>
         </div>
       </div>

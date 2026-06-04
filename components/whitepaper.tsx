@@ -12,27 +12,27 @@ export default function Whitepaper() {
     {
       title: "Executive Summary",
       content:
-        "TierX (TierX) is the upgraded sovereign token built to power a decentralized, trust-backed economic system for sovereign nations starting with Ayiti (Haiti). Backed by a 100 billion supply, TierX integrates real-world liquidity, digital identity, and financial restoration through on-chain smart contract protocols.",
+        "TierX (TIERX) is a private digital wealth infrastructure token designed to power a decentralized, trust-backed economic system. With a 100 billion supply, TierX integrates real-world liquidity, digital identity, and financial restoration through on-chain smart contract protocols.",
     },
     {
       title: "Origin & Evolution",
       content:
-        "Tier originated as a yield-generating asset token. TierX evolves this mission — scaling up its liquidity base, integrating military-grade economic engines, and enabling real-time distribution of funds via mobile and on-chain mechanisms. TierX is the first 'DeFi stimulus-grade' token to fund insurance, food, housing, and land control in a live economic crisis zone.",
+        "TierX evolved from a yield-generating asset token into a full-spectrum digital wealth infrastructure platform. The protocol scales liquidity operations, integrates automated economic engines, and enables real-time distribution of funds via mobile and on-chain mechanisms.",
     },
     {
       title: "Tokenomics",
       content:
-        "- Total Supply: 100,000,000,000 (100 Billion)\n- Symbol: TIERX\n- Decimals: 18\n- Contract Owner: 0xbB80467caE0cFf80ec742860B813599BE97E9fBf\n- Yield Rate: 3%/mo for 12 months, then scalable to 7%\n- Vault Release: 100M every 30 days for 9 months\n- Governance Ready: Roles for Admin, Minter, Pauser",
+        "- Total Supply: 100,000,000,000 (100 Billion)\n- Symbol: TIERX\n- Decimals: 18\n- Contract: 0xed500EF5e2cdF642ce715675a67A31bDe09a7a97\n- Vault Release: 100M every 30 days\n- Governance Ready: Roles for Admin, Minter, Pauser",
     },
     {
-      title: "Real-World Integrations",
+      title: "Ecosystem Integration",
       content:
-        "- T-Rex Card (TierX Card): Swipe-enabled debit card linked to your TierX vaults.\n- HTGX Bridge: Pegged stable bridge for Haitian Gourde (HTG → HTGX → TierX → USDC → BTC).\n- TrustVaults: All vaults are backed by the Sceptre Dominion Private Trust and governed by divine trust law.\n- TierX Stipends: Tokenized real estate and vehicles offer monthly cash stipends.",
+        "- TierX Asset Management: Portfolio tracking and treasury management dashboard.\n- Cross-Chain Bridge: Seamless asset transfers across blockchain networks.\n- Smart Vaults: Automated treasury operations with timelock and yield mechanisms.\n- Multi-Role Governance: Role-based access control for operational security.",
     },
     {
-      title: "Vision Forward",
+      title: "Vision & Roadmap",
       content:
-        "TierX is more than a token — it's a living treasury for sovereign nations. Starting with Ayiti, it will fund insurance, rebuild homes, purchase food, back schools, and create a new global economy for the underserved. Phase II will deploy to Jamaica, West Africa, and the Diaspora.",
+        "TierX is building a comprehensive digital wealth infrastructure ecosystem. Initial focus on core protocol development and liquidity operations, expanding into real-world asset tokenization, cross-border payment infrastructure, and community economic development programs.",
     },
   ]
 
@@ -50,11 +50,17 @@ export default function Whitepaper() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
+          <div className="inline-flex items-center gap-2 rounded-pill bg-primary/10 px-4 py-1.5 mb-6">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-caption-strong text-primary font-semibold uppercase tracking-wider">
+              Whitepaper
+            </span>
+          </div>
           <h2 className="text-display-sm font-display text-ink mb-4">
-            Whitepaper
+            Technical Documentation
           </h2>
           <p className="text-body-md text-muted max-w-2xl mx-auto">
-            TIERX TOKEN WHITE PAPER: SOVEREIGN ECONOMIC ENGINE OF THE NEW ERA
+            Comprehensive technical overview of the TierX protocol, tokenomics, ecosystem architecture, and roadmap.
           </p>
         </motion.div>
 
@@ -70,7 +76,7 @@ export default function Whitepaper() {
               <div className="bg-surface-soft p-4 border-b border-hairline flex justify-between items-center">
                 <div className="flex items-center gap-2">
                   <FileText className="text-primary" size={20} />
-                  <span className="text-title-sm font-semibold text-ink">TIERX_Whitepaper.pdf</span>
+                  <span className="text-title-sm font-semibold text-ink">TIERX_Technical_Overview.pdf</span>
                 </div>
                 <span className="text-body-sm text-muted">8 pages</span>
               </div>
@@ -89,17 +95,18 @@ export default function Whitepaper() {
                     </div>
                   </div>
                   <h1 className="text-center text-title-lg font-display text-ink mb-2">
-                    TIERX TOKEN WHITE PAPER
+                    TIERX TECHNICAL OVERVIEW
                   </h1>
                   <p className="text-center text-primary font-medium mb-4">
-                    SOVEREIGN ECONOMIC ENGINE OF THE NEW ERA
+                    Private Digital Wealth Infrastructure
                   </p>
                   <p className="text-center text-body-sm text-muted mb-6">
-                    Issued under the Authority of Sceptre Dominion Private Trust
+                    Protocol Documentation v1.0
                   </p>
                   <div className="border-t border-hairline pt-4 mt-8">
                     <p className="text-body-sm text-muted">
-                      This document outlines the vision, tokenomics, and implementation of the TierX token ecosystem...
+                      This document outlines the vision, tokenomics, architecture, and implementation
+                      of the TierX ecosystem...
                     </p>
                   </div>
                 </div>
@@ -130,7 +137,7 @@ export default function Whitepaper() {
               style={{ height: "56px" }}
             >
               <Download size={20} />
-              Preview and Download Whitepaper
+              Download Full Document
             </a>
 
             <div className="space-y-3">
@@ -166,14 +173,6 @@ export default function Whitepaper() {
                   )}
                 </div>
               ))}
-            </div>
-
-            <div className="mt-8 rounded-xl border border-primary/20 bg-primary/5 p-6">
-              <p className="text-body-md text-ink">
-                <span className="font-semibold text-primary">Issued by:</span> SCEPTRE DOMINION PRIVATE TRUST
-                <br />
-                Global Ecclesiastical Sovereign Asset Authority
-              </p>
             </div>
           </motion.div>
         </div>

@@ -14,11 +14,17 @@ export default function PriceChart() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-display-sm font-display text-ink mb-4">
+          <div className="inline-flex items-center gap-2 rounded-pill bg-primary/10 px-4 py-1.5 mb-6">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-caption-strong text-primary font-semibold uppercase tracking-wider">
+              Price Chart
+            </span>
+          </div>
+          <h2 className="text-display-sm font-headline text-ink mb-4">
             Live Price Chart
           </h2>
           <p className="text-body-md text-muted max-w-2xl mx-auto">
-            Track TierX price movements in real-time with our integrated chart.
+            Track TIERX price movements in real-time with on-chain data.
           </p>
         </motion.div>
 
@@ -34,7 +40,7 @@ export default function PriceChart() {
               <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                 <TrendingUp className="text-primary" size={16} />
               </div>
-              <span className="text-title-md font-semibold text-ink">TierX / USDC</span>
+              <span className="text-title-md font-semibold text-ink">TIERX / USDC</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 rounded-full bg-semantic-up"></div>
@@ -53,33 +59,7 @@ export default function PriceChart() {
               style={{ minHeight: "400px", background: "#0A0A0A" }}
               loading="lazy"
             />
-          </div>  
-        </motion.div>
-
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 max-w-4xl mx-auto"
-        >
-          {[
-            { title: "Real-Time Data", desc: "Live price updates and trading volume directly from the blockchain" },
-            { title: "Technical Analysis", desc: "Advanced charting tools and indicators for informed trading decisions" },
-            { title: "Market Insights", desc: "Comprehensive market data and trading pair information" },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="rounded-xl border border-hairline bg-surface-card p-8 text-center"
-            >
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="text-primary" size={24} />
-              </div>
-              <h3 className="text-title-md font-semibold text-ink mb-3">{item.title}</h3>
-              <p className="text-body-md text-muted">{item.desc}</p>
-            </div>
-          ))}
+          </div>
         </motion.div>
       </div>
     </section>

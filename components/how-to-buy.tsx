@@ -6,9 +6,9 @@ import Image from "next/image"
 
 export default function HowToBuy() {
   const steps = [
-    { step: "Step 1", title: "Create an Ethereum Wallet", description: "Create an Ethereum based wallet in MetaMask or your choice of app.", icon: Wallet },
-    { step: "Step 2", title: "Buy Ethereum", description: "Buy Ethereum from a trusted CEX or DEX and transfer to wallet.", icon: ArrowRightLeft },
-    { step: "Step 3", title: "Swap for TierX", description: "Click on Buy now and swap it all for some TierX Coins.", icon: ShoppingCart },
+    { step: "Step 1", title: "Create an Ethereum Wallet", description: "Set up an Ethereum wallet using MetaMask, WalletConnect, or your preferred provider.", icon: Wallet },
+    { step: "Step 2", title: "Fund with Ethereum", description: "Purchase ETH from a centralized or decentralized exchange and transfer to your wallet.", icon: ArrowRightLeft },
+    { step: "Step 3", title: "Swap for TIERX", description: "Use Uniswap or your preferred DEX to swap ETH for TIERX tokens.", icon: ShoppingCart },
   ]
 
   return (
@@ -21,9 +21,15 @@ export default function HowToBuy() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-display-sm font-display text-ink mb-4">How to Buy</h2>
+          <div className="inline-flex items-center gap-2 rounded-pill bg-primary/10 px-4 py-1.5 mb-6">
+            <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-caption-strong text-primary font-semibold uppercase tracking-wider">
+              How to Buy
+            </span>
+          </div>
+          <h2 className="text-display-sm font-headline text-ink mb-4">Acquire TIERX</h2>
           <p className="text-body-md text-muted max-w-2xl mx-auto">
-            Get started with TierX in just 3 simple steps. Join the sovereign economic revolution today.
+            Get started in three simple steps. TIERX is available on Ethereum through decentralized exchanges.
           </p>
         </motion.div>
 
@@ -49,20 +55,6 @@ export default function HowToBuy() {
               <h3 className="text-title-md font-semibold text-ink mt-2 mb-3">{step.title}</h3>
               <p className="text-body-md text-muted">{step.description}</p>
 
-              {index === 2 && (
-                <div className="mt-6 flex justify-center">
-                  <div className="w-12 h-12 rounded-full bg-primary p-1 flex items-center justify-center">
-                    <Image
-                      src="/tierx-logo.png"
-                      alt="TierX Logo"
-                      width={40}
-                      height={40}
-                      className="w-full h-full object-contain"
-                    />
-                  </div>
-                </div>
-              )}
-
               {index < steps.length - 1 && (
                 <div className="hidden md:block absolute top-1/2 -right-4 w-8 h-0.5 bg-hairline" />
               )}
@@ -84,11 +76,24 @@ export default function HowToBuy() {
             className="inline-flex items-center justify-center gap-2 rounded-pill bg-primary px-8 py-4 text-base font-semibold text-on-primary transition-colors hover:bg-primary-active"
             style={{ height: "56px" }}
           >
-            Buy TierX Now
+            Swap on Uniswap
             <div className="w-5 h-5 relative">
               <Image src="/uniswap-logo.webp" alt="Uniswap" fill className="object-contain" />
             </div>
           </a>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="mt-12 text-center"
+        >
+          <p className="text-caption text-muted max-w-lg mx-auto">
+            Always verify the official contract address before transacting. TIERX is an
+            ERC-20 token on the Ethereum network.
+          </p>
         </motion.div>
       </div>
     </section>

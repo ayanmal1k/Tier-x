@@ -1,34 +1,34 @@
 import Header from "@/components/header"
 import Hero from "@/components/hero"
-import TradingPlatforms from "@/components/trading-platforms"
-import Whitepaper from "@/components/whitepaper"
+import TrustBar from "@/components/trust-bar"
+import WhatTierXDoes from "@/components/what-tierx-does"
+import Ecosystem from "@/components/ecosystem"
 import Tokenomics from "@/components/tokenomics"
-import Engines from "@/components/engines"
-import ContractAddress from "@/components/contract-address"
+import Treasury from "@/components/treasury"
+import Security from "@/components/security"
+import Whitepaper from "@/components/whitepaper"
 import HowToBuy from "@/components/how-to-buy"
-import Roadmap from "@/components/roadmap"
-import AboutUs from "@/components/about-us"
-import Socials from "@/components/socials"
-import Footer from "@/components/footer"
 import PriceChart from "@/components/price-chart"
-import Transparency from "@/components/transparency"
+import Roadmap from "@/components/roadmap"
+import Community from "@/components/community"
+import Footer from "@/components/footer"
 
 export default function Home() {
   return (
     <main className="min-h-screen">
       <Header />
       <Hero />
-      <TradingPlatforms />
-      <PriceChart />
-      <Whitepaper />
+      <TrustBar />
+      <WhatTierXDoes />
+      <Ecosystem />
       <Tokenomics />
-      <Engines />
-      <Transparency />
-      <ContractAddress />
+      <Treasury />
+      <Security />
+      <Whitepaper />
       <HowToBuy />
+      <PriceChart />
       <Roadmap />
-      <AboutUs />
-      <Socials />
+      <Community />
       <Footer />
     </main>
   )
