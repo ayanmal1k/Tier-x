@@ -5,27 +5,33 @@ import { Menu, X, ChevronDown, ChartLine, ShoppingCart, ArrowRight } from "lucid
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
+import { usePathname } from "next/navigation"
 
 const navItems = [
-  { label: "Home", href: "#hero" },
-  { label: "Ecosystem", href: "#ecosystem" },
-  { label: "Tokenomics", href: "#tokenomics" },
-  { label: "Treasury", href: "#treasury" },
+  { label: "Home", href: "/" },
+  { label: "Ecosystem", href: "/#ecosystem" },
+  { label: "Tokenomics", href: "/#tokenomics" },
+  { label: "Treasury", href: "/#treasury" },
   { label: "Security", href: "/security" },
-  { label: "Roadmap", href: "#roadmap" },
-  { label: "Community", href: "#community" },
+  { label: "Roadmap", href: "/#roadmap" },
+  { label: "Community", href: "/#community" },
 ]
 
 const resourceLinks = [
-  { label: "Whitepaper", href: "#whitepaper", icon: null },
-  { label: "Price Chart", href: "#price-chart", icon: ChartLine },
-  { label: "How to Buy", href: "#how-to-buy", icon: ShoppingCart },
+  { label: "Whitepaper", href: "/#whitepaper", icon: null },
+  { label: "Price Chart", href: "/#price-chart", icon: ChartLine },
+  { label: "How to Buy", href: "/#how-to-buy", icon: ShoppingCart },
 ]
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [resourcesOpen, setResourcesOpen] = useState(false)
+  const pathname = usePathname()
+  const isSecurityPage = pathname === "/security"
+
+  /* ── dark theme when on /security and not scrolled ── */
+  const darkMode = isSecurityPage && !scrolled
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +49,9 @@ export default function Header() {
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
           ? "bg-canvas/95 backdrop-blur-md shadow-card"
-          : "bg-transparent"
+          : darkMode
+            ? "bg-surface-dark/95 backdrop-blur-md"
+            : "bg-transparent"
       }`}
     >
       <div
@@ -57,10 +65,14 @@ export default function Header() {
               alt="TierX"
               width={32}
               height={32}
-              className="rounded-full transition-all duration-300"
+              className={`rounded-full transition-all duration-300 ${darkMode ? "brightness-0 invert" : ""}`}
             />
           </div>
-          <span className="text-lg font-semibold text-ink transition-colors">
+          <span
+            className={`text-lg font-semibold transition-colors ${
+              darkMode ? "text-on-dark" : "text-ink"
+            }`}
+          >
             TierX
           </span>
         </Link>
@@ -70,7 +82,11 @@ export default function Header() {
             <Link
               key={item.label}
               href={item.href}
-              className="text-sm font-medium transition-colors text-body hover:text-ink"
+              className={`text-sm font-medium transition-colors ${
+                darkMode
+                  ? "text-on-dark-soft hover:text-on-dark"
+                  : "text-body hover:text-ink"
+              }`}
             >
               {item.label}
             </Link>
@@ -82,7 +98,11 @@ export default function Header() {
             onMouseLeave={() => setResourcesOpen(false)}
           >
             <button
-              className="flex items-center gap-1 text-sm font-medium transition-colors text-body hover:text-ink"
+              className={`flex items-center gap-1 text-sm font-medium transition-colors ${
+                darkMode
+                  ? "text-on-dark-soft hover:text-on-dark"
+                  : "text-body hover:text-ink"
+              }`}
             >
               Resources
               <ChevronDown
@@ -124,7 +144,11 @@ export default function Header() {
             <Link
               key={item.label}
               href={item.href}
-              className="text-sm font-medium transition-colors text-body hover:text-ink"
+              className={`text-sm font-medium transition-colors ${
+                darkMode
+                  ? "text-on-dark-soft hover:text-on-dark"
+                  : "text-body hover:text-ink"
+              }`}
             >
               {item.label}
             </Link>
@@ -143,7 +167,9 @@ export default function Header() {
         </div>
 
         <button
-          className="md:hidden transition-colors text-ink"
+          className={`md:hidden transition-colors ${
+            darkMode ? "text-on-dark" : "text-ink"
+          }`}
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? <X size={24} /> : <Menu size={24} />}
